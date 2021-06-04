@@ -3,3 +3,215 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+# class Song
+#   @@all = []
+#   attr_accessor  :name, :genre, :artist, :song
+#   def initialize(name)
+#     @@all << self(name)
+# @name = name
+# @artist = artist
+#
+#   end
+#
+#   def all
+#     all = @@all
+#     @@all
+#   end
+#   def destroy_all
+#     @@all
+#   end
+#
+#   def create(name)
+#     self.initialize(name)
+#   end
+#
+#   def add_song(song)
+#      @@all << Artist.new
+#   end
+#
+# end
+class Song
+  #extend Concerns::Findable
+
+  attr_accessor :name
+  attr_reader :songs
+
+  @@all = []
+
+  def initialize(name)
+    @name = name
+    #@songs = []
+  #  @@all << self
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    self.all.clear
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.create(name)
+    artist = self.new(name)
+    artist.save
+    artist
+  end
+
+  def add_song(song)
+    unless song.artist.instance_of?(Artist)
+      song.artist = self
+    end
+    unless self.songs.include?(song)
+      self.songs << song
+    end
+    song
+  end
+
+  def genres
+    self.songs.collect {|song| song.genre}.uniq
+  end
+
+end
+class Artist
+  #extend Concerns::Findable
+
+  attr_accessor :name
+  attr_reader :songs
+
+  @@all = []
+
+  def initialize(name)
+    @name = name
+    @songs = []
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    self.all.clear
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.create(name)
+    artist = self.new(name)
+    artist.save
+    artist
+  end
+
+  def add_song(song)
+    unless song.artist.instance_of?(Artist)
+      song.artist = self
+    end
+    unless self.songs.include?(song)
+      self.songs << song
+    end
+    song
+  end
+
+  def genres
+    self.songs.collect {|song| song.genre}.uniq
+  end
+
+end
+class Genre
+#  extend Concerns::Findable
+
+  attr_accessor :name
+  attr_reader :songs
+
+  @@all = []
+
+  def initialize(name)
+    @name = name
+    @songs = []
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    self.all.clear
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.create(name)
+    artist = self.new(name)
+    artist.save
+    artist
+  end
+
+  def add_song(song)
+    unless song.artist.instance_of?(Artist)
+      song.artist = self
+    end
+    unless self.songs.include?(song)
+      self.songs << song
+    end
+    song
+  end
+
+  def genres
+    self.songs.collect {|song| song.genre}.uniq
+  end
+
+end
+    # class Artist
+    #     attr_accessor  :name, :genre, :artist, :song
+    #   @@all = []
+    #   def initialize(name)
+    #     @@all << self(name)
+
+    #   end
+    #
+    #   def all
+    #     all = @@all
+    #     @@all
+    #   end
+    #   def destroy_all
+    #     @@all
+    #   end
+    #
+    #   def create(name)
+    #     self.initialize(name)
+    #   end
+    #
+    #   def add_song
+    #     Song.new(artist)
+    #   end
+    # end
+
+    # class Genre
+    #   attr_accessor :name, :genre, :artist, :song
+    #   @@all = []
+    #   def initialize(name)
+    #     @@all << self(name)
+    #
+    #   end
+    #
+    #   def all
+    #     all = @@all
+    #     @@all
+    #   end
+    #   def destroy_all
+    #     @@all
+    #   end
+    #
+    #   def create(name)
+    #     self.initialize(name)
+    #   end
+    #
+    # end
